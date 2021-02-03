@@ -35,8 +35,8 @@ ip link set ovs_eth0 promisc on
 
 ```
 docker network create -d macvlan \
---subnet=192.168.1.0/24 \
---gateway=192.168.1.1 \
+--subnet=192.168.18.0/24 \
+--gateway=192.168.18.1 \
 -o parent=ovs_eth0 \
 bridge-host
 ```
@@ -60,7 +60,7 @@ docker run -d --name uuplugin \
 --privileged \
 -e UU_LAN_IPADDR=192.168.18.77 \
 -e UU_LAN_GATEWAY=192.168.18.1 \
-uuplugin
+dianqk/uuplugin
 ```
 
 - `UU_LAN_IPADDR` 为该容器使用的 IP，也是游戏主机的网关
