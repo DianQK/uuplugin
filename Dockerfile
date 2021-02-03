@@ -9,7 +9,6 @@ ENV UU_LAN_DNS="119.29.29.29"
 
 USER root
 
-RUN sed -i 's_downloads.openwrt.org_mirrors.tuna.tsinghua.edu.cn/openwrt_' /etc/opkg/distfeeds.conf
 RUN mkdir /var/lock
 RUN opkg update
 RUN opkg install libustream-mbedtls ca-certificates kmod-tun
