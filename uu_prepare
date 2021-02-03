@@ -1,0 +1,28 @@
+#!/bin/sh /etc/rc.common
+
+START=91
+
+start() {
+  echo "config interface 'loopback'
+    option ifname 'lo'
+    option proto 'static'
+    option ipaddr '127.0.0.1'
+    option netmask '255.0.0.0'
+
+config interface 'lan'
+    option type 'bridge'
+    option ifname 'eth0'
+    option proto 'static'
+    option ipaddr '$UU_LAN_IPADDR'
+    option gateway '$UU_LAN_GATEWAY'
+    option netmask '$UU_LAN_NETMASK'
+    list dns '$UU_LAN_DNS'" > /etc/config/network
+  /etc/init.d/network restart
+
+  uci set dhcp.lan.ignore=1
+  uci commit dhcp
+  /etc/init.d/dnsmasq restart
+
+  wget https://uu.gdl.netease.com/uuplugin-script/202012111056/install.sh -O /root/install.sh
+  /bin/sh /root/install.sh openwrt $(uname -m)
+}
