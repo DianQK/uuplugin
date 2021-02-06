@@ -11,7 +11,7 @@ USER root
 
 RUN mkdir /var/lock
 RUN opkg update
-RUN opkg install ca-certificates kmod-tun
+RUN opkg install libustream-mbedtls ca-certificates kmod-tun
 
 ADD uu_prepare /etc/init.d/uu_prepare
 RUN /etc/init.d/uu_prepare enable
